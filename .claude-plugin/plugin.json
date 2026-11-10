@@ -1,0 +1,9 @@
+{
+  "name": "video-notes",
+  "version": "0.1.0",
+  "description": "Turn a narrated screen recording into a timestamped punch list with stills. Whisper and ffmpeg run locally.",
+  "author": { "name": "weeeha" },
+  "repository": "https://github.com/weeeha/video-notes",
+  "license": "MIT",
+  "keywords": ["video", "feedback", "whisper", "ffmpeg", "screen-recording"]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "video-notes",
+  "owner": { "name": "weeeha" },
+  "plugins": [
+    { "name": "video-notes", "source": "./", "description": "Narrated screen recording to timestamped punch list, locally." }
+  ]
+}
