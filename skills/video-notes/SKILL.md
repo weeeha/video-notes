@@ -21,7 +21,8 @@ audio is sent to a cloud speech or vision API.
    `<stem>.notes/`: `transcript.md` (one row per merged segment with a frame name) and 1600px
    stills. When `<stem>.notes/` is already newer than the video it is reused as is; `--force`
    rebuilds, `--model turbo` when the base transcript is garbled, `--every 10` for a demo with no
-   narration, `--sheet` for 2x2 contact sheets, `--max-frames 40` default.
+   narration, `--sheet` for 2x2 contact sheets, `--max-row 5` for more frames when talk and
+   screen move fast (rows are capped at 8 s, one frame per row), `--max-frames 40` default.
 2. **Read `transcript.md`, then the frames.** With `--sheet`, skim `sheet_NN.jpg` first (four frames
    per read; tiles run left to right, top to bottom, in frame order, so sheet 01 holds frames 1 to 4
    and its top-left tile is the earliest), then read the single frame for every row whose words point

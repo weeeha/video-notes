@@ -67,15 +67,21 @@ python3 skills/video-notes/video-notes.py path/to/feedback.mov --sheet
 | `--model turbo` | Bigger Whisper model when the default `base.en` transcript is garbled |
 | `--every 10` | Extra frame every 10 seconds, for demos with no narration |
 | `--sheet` | 2x2 contact sheets for a cheap first skim |
+| `--max-row 8` | Longest transcript row in seconds, one frame per row (default 8; lower it for fast talk over fast screen changes) |
 | `--max-frames 40` | Cap on stills (default 40) |
 | `--width 2400` | Larger stills when small text must be read |
 | `--force` | Rebuild even when the notes are newer than the video |
 
 An existing `<video>.srt` next to the file is reused instead of transcribing.
 
+## Tests
+
+```bash
+python3 -m unittest discover tests
+```
+
 ## Known limits
 
-- Whisper segments are merged into rows of up to 25 seconds, and a frame is taken at the start of each row. A short clip with steady talking can become one row with one frame; add `--every 4` to get a still every few seconds.
 - The time labels on contact-sheet tiles need an ffmpeg built with the `drawtext` filter (some builds lack it; check with `ffmpeg -filters | grep drawtext`). Without it the sheet is still made, just unlabelled; tiles run left to right, top to bottom.
 
 ## Privacy
