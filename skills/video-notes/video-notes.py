@@ -5,6 +5,7 @@
   video-notes.py "<video>" --model turbo  # re-transcribe with a bigger whisper model when base is garbled
   video-notes.py "<video>" --every 10     # add a frame every N seconds on top of the segment frames
   video-notes.py "<video>" --max-frames 30
+  video-notes.py "<video>" --max-row 5     # shorter rows, more frames, for fast talk over fast screen changes
 
 Writes next to the video, in <stem>.notes/:
   transcript.srt        whisper output (or a copy of the existing .srt)
@@ -71,7 +72,10 @@ def parse_srt(path):
     return segs
 
 
-def merge(segs, gap=3.0, max_len=25.0):
+def merge(segs, gap=3.0, max_len=8.0):
+    """Join whisper segments into rows. Each row gets one frame at its start, so a row must stay
+    short enough that the screen has not moved on: max_len caps it (was 25 s, which let a short
+    clip of steady talk collapse into one row and one frame)."""
     out = []
     for st, en, tx in segs:
         if out and st - out[-1][1] <= gap and en - out[-1][0] <= max_len:
@@ -135,6 +139,7 @@ def main():
     ap.add_argument("--every", type=float, default=0, help="extra frame every N seconds")
     ap.add_argument("--max-frames", type=int, default=40)
     ap.add_argument("--width", type=int, default=1600)
+    ap.add_argument("--max-row", type=float, default=8.0, help="longest merged transcript row in seconds; one frame per row")
     ap.add_argument("--sheet", action="store_true", help="also tile the frames 2x2 into sheet_NN.jpg for a first skim")
     ap.add_argument("--force", action="store_true", help="rebuild even when <stem>.notes/transcript.md is newer than the video")
     a = ap.parse_args()
@@ -161,7 +166,7 @@ def main():
         segs, source = [], "no audio track"
     else:
         srt, source = transcribe(video, out, model)
-        segs = merge(parse_srt(srt))
+        segs = merge(parse_srt(srt), max_len=a.max_row)
 
     times = [s[0] for s in segs]
     if a.every:
