@@ -1,0 +1,38 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Orbit</title>
+<style>
+  *{box-sizing:border-box} body{margin:0;font:15px/1.4 -apple-system,Helvetica,Arial,sans-serif;color:#1d2330;background:#f4f5f7;width:1600px;height:900px;overflow:hidden}
+  header{height:64px;background:#fff;border-bottom:1px solid #e3e5ea;display:flex;align-items:center;padding:0 28px;gap:16px}
+  .logo{font-weight:700;font-size:20px} .crumb{color:#6b7280}
+  aside{position:absolute;top:64px;left:0;bottom:0;width:240px;background:#fff;border-right:1px solid #e3e5ea;padding:20px}
+  aside input{width:100%;padding:6px 8px;border:1px solid #d6d9df;border-radius:6px;font-size:12px;margin-top:340px}
+  aside a{display:block;padding:8px 10px;border-radius:6px;color:#374151;text-decoration:none} aside a.on{background:#eef1fb;color:#2948c7;font-weight:600}
+  main{position:absolute;top:64px;left:240px;right:0;bottom:0;padding:32px 40px}
+  h1{font-size:26px;margin:0 0 4px} .sub{color:#6b7280;margin-bottom:24px}
+  .bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .export{font-size:11px;padding:3px 7px;background:#e5e7eb;color:#9ca3af;border:0;border-radius:4px}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e3e5ea;border-radius:8px}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid #eef0f3} th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#6b7280;background:#fafbfc}
+  .pill{font-size:12px;padding:2px 8px;border-radius:99px;background:#e7f6ec;color:#1b7a3d} .pill.w{background:#fff4e0;color:#9a5b00}
+  #cur{position:absolute;width:56px;height:56px;border:4px solid #ef4444;border-radius:50%;transform:translate(-50%,-50%);display:none}
+</style></head><body>
+<header><span class="logo">Orbit</span><span class="crumb">/ Workspace / Projects</span></header>
+<aside><a class="on">Projects</a><a>Reports</a><a>Team</a><a>Billing</a><a>Settings</a><input placeholder="Search projects"></aside>
+<main>
+  <h1>Projects</h1><div class="sub">12 active projects across 3 teams</div>
+  <div class="bar"><strong>All projects</strong><button class="export">Export</button></div>
+  <table>
+    <tr><th>Name</th><th>Owner</th><th>Status</th><th>Created</th><th>Start date</th></tr>
+    <tr><td>Checkout redesign</td><td>Avery</td><td><span class="pill">On track</span></td><td>Mar 4, 2026</td><td>Mar 4, 2026</td></tr>
+    <tr><td>Mobile onboarding</td><td>Jordan</td><td><span class="pill w">At risk</span></td><td>Apr 18, 2026</td><td>Apr 18, 2026</td></tr>
+    <tr><td>Billing v2</td><td>Sam</td><td><span class="pill">On track</span></td><td>May 2, 2026</td><td>May 2, 2026</td></tr>
+    <tr><td>Search index</td><td>Riley</td><td><span class="pill">On track</span></td><td>Jun 9, 2026</td><td>Jun 9, 2026</td></tr>
+    <tr><td>Partner API</td><td>Casey</td><td><span class="pill w">At risk</span></td><td>Jul 21, 2026</td><td>Jul 21, 2026</td></tr>
+  </table>
+</main>
+<div id="cur"></div>
+<script>
+  const p=new URLSearchParams(location.search), c=document.getElementById('cur');
+  if(p.get('x')){c.style.left=p.get('x')+'px';c.style.top=p.get('y')+'px';c.style.display='block'}
+</script>
+</body></html>
